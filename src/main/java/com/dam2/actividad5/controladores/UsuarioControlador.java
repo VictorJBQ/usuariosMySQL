@@ -29,7 +29,7 @@ public class UsuarioControlador {
 	@Autowired
 	private PedidoRepositorio pedidoRepositorio;
 
-	@PostMapping(path = "/add")
+	@PostMapping(path = "add")
 	public @ResponseBody String addNewUsuarii(@RequestParam String name, @RequestParam String email) {
 		Usuario usu = new Usuario();
 		usu.setName(name);
@@ -38,7 +38,7 @@ public class UsuarioControlador {
 		return "Saved";
 	}
 
-	@GetMapping(path = "/all")
+	@GetMapping(path = "all")
 	public @ResponseBody Iterable<Usuario> getAllUser() {
 		return usuarioRepositorio.findAll();
 	}
@@ -51,26 +51,26 @@ public class UsuarioControlador {
 
 	}
 	
-	@GetMapping(path="/usuario/index")
+	@GetMapping(path="usuario/index")
 	public String inicio(Model modelo) {
 		
 		modelo.addAttribute("mensaje",modelo.getAttribute("mensaje"));
-		return "/usuario/index";
+		return "usuario/index";
 		
 	}
-	@GetMapping(path="/usuario/listado")
+	@GetMapping(path="usuario/listado")
 	public String listarUsuarios(PedidoForm pedidoForm,Model modelo) {
 		Iterable<Usuario> itUsuario = usuarioRepositorio.findAll();
 		System.out.println("it Usuario: "+itUsuario);
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		itUsuario.forEach(listaUsuarios::add);
 		modelo.addAttribute("listaUsuarios",listaUsuarios);
-		return "/usuario/listado";
+		return "usuario/listado";
 		
 	}
-	@PostMapping(path="/usuario/listado")
+	@PostMapping(path="usuario/listado")
 	public String listabusca(PedidoForm pedidoForm,Model modelo) {
-		return "/usuario/listado";
+		return "usuario/listado";
 	}
 
 	@PostMapping(path = "usuario/alta")
@@ -84,19 +84,19 @@ public class UsuarioControlador {
 		return inicio(model);
 	}
 	
-	@GetMapping(path="/usuario/altapedido")
+	@GetMapping(path="usuario/altapedido")
 	public String showForm(PedidoForm pedidoform, Model modelo) {
 		
 		Iterable<Usuario> itusuario = usuarioRepositorio.findAll();
 		List<Usuario> listausuarios= new ArrayList<Usuario>();
 		itusuario.forEach(listausuarios::add);
 		modelo.addAttribute("listaUsuarios",listausuarios);
-		return "/usuario/altapedido";
+		return "usuario/altapedido";
 	}
-	@GetMapping(path="/usuario/buscaArticulo")
+	@GetMapping(path="usuario/buscaArticulo")
 	public String showFormBuscaArticulo(buscaArticuloForm buscaArticulo,Model modelo) {
 		
-		return "/usuario/buscaArticulo";
+		return "usuario/buscaArticulo";
 	}
 	@PostMapping(path = "usuario/buscaArticulo")
 	public String BusquedaArticulo( buscaArticuloForm pedidoForm, Model model) {
@@ -104,16 +104,16 @@ public class UsuarioControlador {
 		List<pedidos> listapedido = new ArrayList<pedidos>();
 		pedi.forEach(listapedido::add);
 		model.addAttribute("listapedidos",listapedido);
-		return "/usuario/listadopedidos";
+		return "usuario/listadopedidos";
 
 	}
-	@GetMapping(path="/usuario/buscaPedidosClientes")
+	@GetMapping(path="usuario/buscaPedidosClientes")
 	public String showFormBuscaPedidos(PedidoForm pedidoForm,Model modelo) {
 		Iterable<Usuario> itusuario = usuarioRepositorio.findAll();
 		List<Usuario> listausuarios= new ArrayList<Usuario>();
 		itusuario.forEach(listausuarios::add);
 		modelo.addAttribute("listaUsuarios",listausuarios);
-		return "/usuario/buscaPedidosClientes";
+		return "usuario/buscaPedidosClientes";
 	}
 	@PostMapping(path = "usuario/buscaPedidosClientes")
 	public String Busqueda( PedidoForm pedidoForm, Model model) {
@@ -121,7 +121,7 @@ public class UsuarioControlador {
 		List<pedidos> listapedido = new ArrayList<pedidos>();
 		pedi.forEach(listapedido::add);
 		model.addAttribute("listapedidos",listapedido);
-		return "/usuario/listadopedidos";
+		return "usuario/listadopedidos";
 
 	}
 	
@@ -136,14 +136,14 @@ public class UsuarioControlador {
 		model.addAttribute("mensaje", "Pedido "+pedido1.getArticulo()+ " recepcionado correctamente");
 		return inicio(model);
 	}
-	@GetMapping(path="/usuario/listadopedidos")
+	@GetMapping(path="usuario/listadopedidos")
 	public String listarpedidos(Model modelo) {
 		Iterable<pedidos> itPedido = pedidoRepositorio.findAll();
 		System.out.println("it Pedidos: "+itPedido);
 		List<pedidos> listaPedidos = new ArrayList<pedidos>();
 		itPedido.forEach(listaPedidos::add);		
 		modelo.addAttribute("listapedidos",listaPedidos);
-		return "/usuario/listadopedidos";
+		return "usuario/listadopedidos";
 		
 	}
 
